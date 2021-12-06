@@ -1,0 +1,6 @@
+﻿  ellypticcurve.cpp
+c:\users\swalishe\desktop\crypto\ellypticalcurvecrypto\ellypticalcurvecrypto\ellypticcurve.cpp(9): warning C4091: 'typedef ': ignored on left of 'point' when no variable is declared
+c:\users\swalishe\desktop\crypto\ellypticalcurvecrypto\ellypticalcurvecrypto\ellypticcurve.cpp(101): warning C4018: '<': signed/unsigned mismatch
+c:\users\swalishe\desktop\crypto\ellypticalcurvecrypto\ellypticalcurvecrypto\ellypticcurve.cpp(114): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Ellypticalcurvecrypto.vcxproj -> C:\Users\SWalishe\Desktop\Crypto\Ellypticalcurvecrypto\Debug\Ellypticalcurvecrypto.exe
+  Ellypticalcurvecrypto.vcxproj -> C:\Users\SWalishe\Desktop\Crypto\Ellypticalcurvecrypto\Debug\Ellypticalcurvecrypto.pdb (Partial PDB)
