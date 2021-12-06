@@ -174,73 +174,76 @@ int main()
 
 	point gen;
 
-	printf("The ellyptic curve has the equation y^2 = x^3 + a*x + b  (mod p)\n"
-		"enter a prime number ");
+	while (true)
+	{
+		printf("The ellyptic curve has the equation y^2 = x^3 + a*x + b  (mod p)\n"
+			"enter a prime number ");
 
-	scanf_s("%llu", &p);
+		scanf_s("%llu", &p);
 
-	printf("Enter a ");
-	scanf_s("%llu", &a);
+		printf("Enter a ");
+		scanf_s("%llu", &a);
 
-	printf("Enter b ");
-	scanf_s("%llu", &b);
+		printf("Enter b ");
+		scanf_s("%llu", &b);
 
-	gen = findgenerator();
+		gen = findgenerator();
 
-	printf("\n");
+		printf("\n");
 
-	printf("generator G is %llu %llu\n", gen.x, gen.y);
+		printf("generator G is %llu %llu\n", gen.x, gen.y);
 
-	uint64_t order = findorderofgenerator(gen);
+		uint64_t order = findorderofgenerator(gen);
 
-	printf("Order of the generator is %llu\n", order);
+		printf("Order of the generator is %llu\n", order);
 
-	printf("Pick a private key for A which is less than %llu\n", order);
+		printf("Pick a private key for A which is less than %llu\n", order);
 
-	int64_t privatekeyA;
-	scanf_s("%lld", &privatekeyA);
+		int64_t privatekeyA;
+		scanf_s("%lld", &privatekeyA);
 
-	point publickeysentbyA;
-	publickeysentbyA = findmultipleofG(privatekeyA,gen);
-	printf("Public key of A is (%lld,%lld)\n", publickeysentbyA.x, publickeysentbyA.y);
+		point publickeysentbyA;
+		publickeysentbyA = findmultipleofG(privatekeyA, gen);
+		printf("Public key of A is (%lld,%lld)\n", publickeysentbyA.x, publickeysentbyA.y);
 
-	printf("Pick a private key for B which is less than %llu\n", order);
-	int64_t privatekeyB;
-	scanf_s("%lld", &privatekeyB);
+		printf("Pick a private key for B which is less than %llu\n", order);
+		int64_t privatekeyB;
+		scanf_s("%lld", &privatekeyB);
 
-	point publickeysentbyB;
-	publickeysentbyB = findmultipleofG(privatekeyB,gen);
-	printf("Public key of B is (%lld,%lld)\n", publickeysentbyB.x, publickeysentbyB.y);
+		point publickeysentbyB;
+		publickeysentbyB = findmultipleofG(privatekeyB, gen);
+		printf("Public key of B is (%lld,%lld)\n", publickeysentbyB.x, publickeysentbyB.y);
 
-	int64_t message;
-	printf("Enter the message to encrypt which is below %llu\n",p);
-	scanf_s("%lld", &message);
+		int64_t message;
+		printf("Enter the message to encrypt which is below %llu\n", p);
+		scanf_s("%lld", &message);
 
-	//Encryption
-	point mid;
-	mid = findmultipleofG(privatekeyA, publickeysentbyB);
+		//Encryption
+		point mid;
+		mid = findmultipleofG(privatekeyA, publickeysentbyB);
 
-	point cipher;
-	cipher.x = (message + mid.x) % p;
-	cipher.y = (mid.y) % p;
+		point cipher;
+		cipher.x = (message + mid.x) % p;
+		cipher.y = (mid.y) % p;
 
-	printf("The cipher text is %lld,%lld\n", cipher.x, cipher.y);
+		printf("The cipher text is %lld,%lld\n", cipher.x, cipher.y);
 
-	printf("\n");
+		printf("\n");
 
 
-	//decryption
-	point d;
+		//decryption
+		point d;
 
-	point decryptionmid;
-	decryptionmid = findmultipleofG(privatekeyB, publickeysentbyA);
+		point decryptionmid;
+		decryptionmid = findmultipleofG(privatekeyB, publickeysentbyA);
 
-	d.x = findmod((cipher.x - decryptionmid.x), p);
-	d.y = findmod((cipher.y - decryptionmid.y), p);
+		d.x = findmod((cipher.x - decryptionmid.x), p);
+		d.y = findmod((cipher.y - decryptionmid.y), p);
 
-	printf("the decrypted message is %lld", d.x);
+		printf("the decrypted message is %lld\n\n\n\n", d.x);
+		printf("--------------------------------------------------------------------------\n\n\n\n");
 
-	getchar();
+	}
 
 	return 0;
 
